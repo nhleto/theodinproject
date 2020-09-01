@@ -11,6 +11,8 @@ ActiveAdmin.register Flag do
   scope :active
   scope :pending
 
+  member_action :ban_flagged_user, method: :post
+
   includes :flagger, :project_submission
 
   index do
@@ -32,14 +34,16 @@ ActiveAdmin.register Flag do
     attributes_table do
       row :id
       row :flagger
-      row :project_submission do
-        link_to flag.project_submission.repo_url.to_s, flag.project_submission.repo_url
+      row :repo_url do
+        link_to flag.project_submission.repo_url.to_s, flag.project_submission.repo_url, target: '_blank'
+      end
+      row :live_preview_url do
+        link_to flag.project_submission.live_preview_url.to_s, flag.project_submission.live_preview_url, target: '_blank'
       end
       row :reason
       row :status
       row :taken_action
       row :created_at
-      row :updated_at
       row :project_submission_flag_count do
         flags = Flag.where(project_submission: flag.project_submission)
         active = flags.count { |r| r.status == 'active' }
@@ -47,6 +51,7 @@ ActiveAdmin.register Flag do
         "#{flags.count} (#{active} active, #{resolved} resolved)"
       end
     end
+    render 'actions'
   end
 
   form do |f|
@@ -58,6 +63,13 @@ ActiveAdmin.register Flag do
     end
 
     actions
+  end
+
+  controller do
+
+    def ban_flagged_user
+      redirect_to resource_path, notice: "Banned User"
+    end
   end
 
   filter :flagger
