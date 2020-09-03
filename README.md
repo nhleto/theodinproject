@@ -25,8 +25,7 @@ We welcome contributions from beginners and experienced developers alike.
 To find out more about how you can contribute, please read our [contributing guide](https://github.com/TheOdinProject/theodinproject/wiki/Contributing-Guide).
 
 ## Significant Contributors
-
-* [Erik Trautman](https://github.com/eriktrautman)
+* [Henry Leto](https://github.com/yourmum)
 * [Afshin Moktari](https://github.com/afshinator)
 * [Josh Gorchov](https://github.com/gorchov)
 * [Joe Sawyer](https://github.com/zkay)
